@@ -1,29 +1,43 @@
 class Program {
     constructor(tree,...snippets){
         this.tree = tree;
-        this.snippets = Snippet.Join(snippets);
+        this.code = snippets;
     }
 
+    toString(lang, languages) {
+        let finalProgram = "";
 
+        for(const snippet of this.code){
+            let compiled = snippet.toString(lang, languages);
+            finalProgram += compiled;
+            finalProgram += "\n";
+        }
+
+        return finalProgram;
+    }
+
+    addSnippets(...snippets) {
+        this.code = [...this.code, ...snippets];
+    }
 }
 
 class Snippet {
     constructor(...statements) {
-        this.statements = [];
-
-        for(const statement in statements){
-            let fst = statement; // final statement
-            if(typeof statement == Snippet){
-                fst = statement.flatten();
-            }
-
-            this.statements.push(fst);
-        }
+        this.statements = statements;
     }
 
     flatten()
     {
         return this.statements;
+    }
+
+    toString() {
+        let finalProgram = "";
+
+        for(const snippet of this.statements){
+            finalProgram += "\n";
+            finalProgram += snippet.toString();
+        }
     }
 }
 

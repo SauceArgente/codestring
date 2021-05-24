@@ -1,4 +1,4 @@
-const { Language, LanguageTree } = require("./language");
+const { Language, LanguageTree } = require("../language");
 
 const JS_Spec = new Language();
 
