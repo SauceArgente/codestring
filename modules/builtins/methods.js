@@ -18,12 +18,35 @@ class FunctionCall {
 
   toString(lang, tree) {
     this.stringArgs = this.args.map((arg) => arg.toString());
-    
-    return tree.GetProp("FunctionCall", lang)(
-      this.functionName,
-      this.stringArgs
+
+    let cb = tree.GetProp(
+      "FunctionCall",
+      undefined,
+      lang
+    );
+
+    return cb(this.functionName, this.stringArgs);
+  }
+}
+
+class ForEach {
+  constructor(snippet, source, argument) {
+    this.source = source;
+    this.snippet = snippet;
+    this.argument = argument;
+  }
+
+  toString(lang, tree) {
+    this.stringsource = this.source.toString(lang, tree);
+    this.stringsnippet = this.snippet.toString(lang, tree);
+    this.stringargument = this.argument.toString(lang, tree);
+
+    return tree.GetProp("Foreach", undefined, lang)(
+      this.stringsnippet,
+      this.stringsource,
+      this.stringargument
     );
   }
 }
 
-module.exports = { FunctionCall };
+module.exports = { FunctionCall, ForEach };

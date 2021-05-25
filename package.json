@@ -1,5 +1,5 @@
 {
-  "name": "code-tree",
+  "name": "codestring",
   "version": "0.0.1",
   "description": "A package to help you generate clean code output in text format ",
   "main": "index.js",
